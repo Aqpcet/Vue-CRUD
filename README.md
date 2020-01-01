@@ -1,6 +1,10 @@
 # Vue-CRUD
 学习两天写的关于vue-cli的demo
 
+
+
+[预览地址](https://vue.xu-lin.top/)
+
 先来看看效果图
 
 ![Vue-CRUD](GIF/Vue-CRUD.gif)
