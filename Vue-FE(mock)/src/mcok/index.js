@@ -43,6 +43,31 @@ function filter(condition, data) {
   });
 }
 
+//获取当前时间并格式化
+function getNowFormatDate() {
+  var date = new Date();
+  var seperator1 = "-";
+  var seperator2 = ":";
+  var month = date.getMonth() + 1;
+  var strDate = date.getDate();
+  if (month >= 1 && month <= 9) {
+    month = "0" + month;
+  }
+  if (strDate >= 0 && strDate <= 9) {
+    strDate = "0" + strDate;
+  }
+  var h = date.getHours();
+  h = h < 10 ? ('0' + h) : h;
+  var minute = date.getMinutes();
+  var second = date.getSeconds();
+  minute = minute < 10 ? ('0' + minute) : minute;
+  second = second < 10 ? ('0' + second) : second;
+  var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+    + " " + h + seperator2 + minute
+    + seperator2 + second;
+  return currentdate;
+}
+
 // 条件搜索
 Mock.mock("/find", "post", function(options) {
   let data = JSON.parse(options.body).params;
@@ -76,9 +101,7 @@ Mock.mock("/saveOrUpdate", "post", function(options) {
 
   if (data["id"] === "") {
     data["id"] = user.length + 1;
-    data["createDate"] = new Date()
-      .toLocaleString("chinese", { hour12: false })
-      .replace(/\//g, "-");
+    data["createDate"] = getNowFormatDate();
     user.push(data);
   } else {
     let index;
